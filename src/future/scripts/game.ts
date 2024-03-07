@@ -17,7 +17,7 @@ const config = {
     width: DEFAULT_WIDTH,
     height: DEFAULT_HEIGHT
   },
-  scene: [Menu],
+  scene: [Menu, Main],
   physics: {
     default: 'arcade',
     arcade: {

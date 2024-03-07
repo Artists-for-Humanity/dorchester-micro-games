@@ -1,16 +1,10 @@
-import PhaserLogo from '../objects/phaserLogo'
-import FpsText from '../objects/fpsText'
-
 export default class MainScene extends Phaser.Scene {
-  fpsText
-
   constructor() {
-    super({ key: 'MainScene' })
+    super({ key: 'Main' })
   }
 
   create() {
-    new PhaserLogo(this, this.cameras.main.width / 2, 0)
-    this.fpsText = new FpsText(this)
+    console.log('now in main');
 
     // display the Phaser.VERSION
     this.add
@@ -22,6 +16,6 @@ export default class MainScene extends Phaser.Scene {
   }
 
   update() {
-    this.fpsText.update()
+    
   }
 }

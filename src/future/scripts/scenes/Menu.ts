@@ -18,7 +18,8 @@ export default class Menu extends Phaser.Scene
 
 	create() {
     document.getElementById('overlay-btn')!.onclick = () => {
-      console.log('clicked');
+			document.getElementById('menu-overlay')!.style.display = 'none';
+      this.scene.start('Main');
     }
 
 		this.clouds.push(this.add.sprite(-350, this.game.canvas.height / 2, `clouds1`).setScale(1));
