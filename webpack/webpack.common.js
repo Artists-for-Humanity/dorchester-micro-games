@@ -1,6 +1,6 @@
-const path = require('path')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: ['./src/future/scripts/game.ts'],
@@ -28,7 +28,25 @@ module.exports = {
     }
   },
   plugins: [
-    new HtmlWebpackPlugin({ gameName: 'My Phaser Game', template: 'src/future/index.html' }),
+    new HtmlWebpackPlugin({ 
+      filename: 'future.html', // Output file name
+      template: 'src/future/index.html', // Input template file
+      gameName: 'Future Games', // Additional parameters to pass
+    }),
+    new HtmlWebpackPlugin({ 
+      filename: 'past.html',
+      template: 'src/past/index.html',
+      gameName: 'Past Games',
+    }),
+    new HtmlWebpackPlugin({ 
+      filename: 'present.html',
+      template: 'src/present/index.html',
+      gameName: 'Present Games',
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      gameName: 'Portal',
+    }),
     new CopyWebpackPlugin({
       patterns: [
         { from: 'src/future/assets', to: 'assets' },
@@ -37,4 +55,4 @@ module.exports = {
       ]
     })
   ]
-}
+};
