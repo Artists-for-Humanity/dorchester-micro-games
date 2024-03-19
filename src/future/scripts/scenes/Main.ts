@@ -6,11 +6,12 @@ interface BaseTravelComponent {
 }
 
 export default class MainScene extends Phaser.Scene {
-  player: Physics.Arcade.Sprite
+  player: GameObjects.Sprite
   lastMoveTime = 500;
   game: Game;
   lastTextureTotal = 0;
   components: { texture: string; spaces: number }[] = [];
+  tiles: GameObjects.Group;
 
   constructor() {
     super({ key: 'Main' })
@@ -23,8 +24,13 @@ export default class MainScene extends Phaser.Scene {
 	}
 
   create() {
+    document.getElementById('game-overlay')!.style.display = 'flex';
+
     // Create the player sprite
-    this.player = this.physics.add.sprite(400, 300, 'player');
+    this.tiles = this.add.group([]);
+    this.player = this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height - 300, 'player')
+      .setDepth(2);
+
 
     const getTileScale = (textureKey: string) => {
       // the diagonal should fit the width of the screen, so find the ratio between the width and height and adjust accordingly
@@ -38,28 +44,37 @@ export default class MainScene extends Phaser.Scene {
       TravelComponentFactory('grass', 3),
       TravelComponentFactory('road-lanes-2', 2),
       TravelComponentFactory('grass', 3),
-      TravelComponentFactory('train-track', 2)
-    )
+      TravelComponentFactory('train-track', 2),
+      TravelComponentFactory('train-track', 2),
+      TravelComponentFactory('grass', 3),
+      TravelComponentFactory('road-lanes-2', 2),
 
-    const textures = ['grass', 'road-lanes-2', 'grass', 'train-track'];
+    )
 
     let demo = 0;
     this.components.forEach((component: BaseTravelComponent ) => {
       const { texture } = component;
-      this.add.image(0, this.game.canvas.height - (this.textures.get(texture).getSourceImage().height) - demo, texture).setOrigin(0).setScale(getTileScale('grass'), 1).setRotation(PhaserMath.DegToRad(5));
+      const img = this.add.image(0, this.game.canvas.height - (this.textures.get(texture).getSourceImage().height) - demo, texture)
+        .setOrigin(0)
+        .setScale(getTileScale('grass'), 1)
+        .setRotation(PhaserMath.DegToRad(5));
+      
+      this.tiles.add(img);
       demo += this.textures.get(texture).getSourceImage().height;
     })
-
-  
-    // Set collision bounds
-    this.player.setCollideWorldBounds(true);
   
     // Capture keyboard input
-    this.input.keyboard.on('keydown-SPACE', this.movePlayer);
+    this.input.keyboard.on('keydown-SPACE', () => {
+      this.moveTiles();
+    });
+    
+    [
+      
+    ]
   }
 
   generateMap() {
-
+    // some sort of algorithm to generate the components on update
   }
     
   update() {
@@ -69,20 +84,24 @@ export default class MainScene extends Phaser.Scene {
   
     // Allow only left movement
     // this.player.setVelocityX(-100);
+    // this.tiles.incY(2)
+    if ((this.tiles.getChildren()[0] as GameObjects.Image).y > this.game.canvas.height) {
+      this.tiles.remove(this.tiles.getChildren()[0] as GameObjects.Image, true, true);
+    }
   }
   
-  movePlayer() {
-    // Check cooldown
-    if (this.game.getTime() - this.lastMoveTime > 300) {
-      // Set last move time
-      this.lastMoveTime = this.game.getTime();
-      
-      // Set player velocity to move at -10 degrees
-      this.player.setVelocity(-100 * Math.cos(10 * Math.PI / 180), -100 * Math.sin(10 * Math.PI / 180));
-    }
+  moveTiles() {
+    this.tiles.children.iterate((tile) => {
+      this.tweens.add({
+          targets: tile,
+          y: (tile as GameObjects.Image).y + 70,
+          duration: 500,
+          ease: 'Sine.easeInOut'
+      });
+  });
   }
 }
 
-function TravelComponentFactory(texture: string, spaces: number): BaseTravelComponent {
+function TravelComponentFactory(texture: string, spaces: number, action?: () => void): BaseTravelComponent {
   return { texture, spaces };
 }
