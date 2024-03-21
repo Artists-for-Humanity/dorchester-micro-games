@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+
+*{
+    font-family: "Acme", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 4vh;
+    color: rgb(0, 0, 0);
+    text-shadow:
+        -1px -1px 0 white,  
+        1px -1px 0 white,
+        -1px 1px 0 white,
+        1px 1px 0 white;
+}
+
+body {
+    background-image: url(assets/1.0.png);
+    margin: 0;
+    background-size: cover; 
+    background-position: center center;
+    background-attachment: fixed;
+    height: 100vh;
+    width: 100vw;
+}
+
+@keyframes rotateToolOnce {
+    100% {
+      transform: rotate(360deg);
+    }
+}
+
+.tool {
+    height: 15vh;
+    width: 15vh;
+    margin: 50px;
+    background-color: rgba(128, 128, 128, 0.5);
+    border: 5px solid white;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    background-image: url(assets/scissors.png);
+    background-position: center center;
+    background-size: cover;
+}
+
+.toolbar {
+    width: 100%;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: 0;
+}
+
+.transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+.transition img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: transitionAnimation 2s linear;
+}
+
+@keyframes transitionAnimation {
+    0% { opacity: 0; }
+    50% { opacity: .25; }
+    100% { opacity: .5; }
+}
+
+.textContain {
+    margin-top: 10vh;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    position: absolute;
+    font-size: 3vh;
+}
+
+.text {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
