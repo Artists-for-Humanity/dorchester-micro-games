@@ -12,6 +12,7 @@ export default class MainScene extends Phaser.Scene {
   lastTextureTotal = 0;
   components: { texture: string; spaces: number }[] = [];
   tiles: GameObjects.Group;
+  xOffset: number
 
   constructor() {
     super({ key: 'Main' })
@@ -68,9 +69,11 @@ export default class MainScene extends Phaser.Scene {
       this.moveTiles();
     });
     
-    [
-      
-    ]
+    ['ctrl-up', 'ctrl-left', 'ctrl-right', 'ctrl-down'].forEach(control => {
+      document.getElementById(control)!.addEventListener('click', () => {
+        this.moveMap(control.split('-')[1] as 'up' | 'down' | 'right' | 'left');
+      })
+    })
   }
 
   generateMap() {
@@ -98,7 +101,63 @@ export default class MainScene extends Phaser.Scene {
           duration: 500,
           ease: 'Sine.easeInOut'
       });
-  });
+    });
+  }
+
+  isTweening = false;
+
+  moveMap(direction: 'up' | 'down' | 'right' | 'left') {
+    switch(direction) {
+      case "up": {
+        this.tiles.children.iterate((tile) => {
+          this.tweens.add({
+              targets: tile,
+              y: (tile as GameObjects.Image).y + 70,
+              duration: 500,
+              ease: 'Sine.easeInOut',
+              onStart: () => { this.isTweening = true; },
+              onComplete: () => { this.isTweening = false; }
+          });
+        });
+        break;
+      }
+      case "down": {
+        this.tiles.children.iterate((tile) => {
+          this.tweens.add({
+              targets: tile,
+              y: (tile as GameObjects.Image).y - 70,
+              duration: 500,
+              ease: 'Sine.easeInOut',
+              onStart: () => { this.isTweening = true; },
+              onComplete: () => { this.isTweening = false; }
+          });
+        });
+        break;
+      }
+      case "right": {
+        this.tweens.add({
+          targets: this.player,
+          x: (this.player as GameObjects.Sprite).x + 70,
+          y: (this.player as GameObjects.Sprite).y + (70 * Math.tan(PhaserMath.DegToRad(5))),
+          duration: 500,
+          ease: 'Sine.easeInOut',
+          onStart: () => { this.isTweening = true; },
+          onComplete: () => { this.isTweening = false; }
+        });
+        break;
+      }
+      case "left": {
+        this.tweens.add({
+          targets: this.player,
+          x: (this.player as GameObjects.Sprite).x - 70,
+          y: (this.player as GameObjects.Sprite).y - (70 * Math.tan(PhaserMath.DegToRad(5))),
+          duration: 500,
+          ease: 'Sine.easeInOut',
+          onStart: () => { this.isTweening = true; },
+          onComplete: () => { this.isTweening = false; }
+        });
+      }
+    }
   }
 }
 
