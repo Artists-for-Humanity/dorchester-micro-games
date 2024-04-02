@@ -27,12 +27,35 @@
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
 
     <title><%= htmlWebpackPlugin.options.gameName %></title>
-
-    <link rel="preload" href="assets/fonts/Gotham-Black.woff" as="font" type="font/woff" crossorigin>
-    <link rel="preload" href="assets/fonts/Gotham-Bold.woff" as="font" type="font/woff" crossorigin>
-    <link rel="preload" href="assets/fonts/Gotham-Book.woff" as="font" type="font/woff" crossorigin>
-    <link rel="preload" href="assets/fonts/Gotham-Light.woff" as="font" type="font/woff" crossorigin>
     <style>
+      @font-face {
+        font-family: 'Gotham Black';
+        src: url('assets/fonts/Gotham-Black.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Gotham Bold';
+        src: url('assets/fonts/Gotham-Bold.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Gotham Book';
+        src: url('assets/fonts/Gotham-Book.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Gotham Light';
+        src: url('assets/fonts/Gotham-Light.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+
       html,
       body {
         height: 100%;
@@ -152,7 +175,7 @@
         <div id="ctrl-right" class="ctrl-btn">right</div>
       </div>
     </div>
-    <div id="phaser-game">
+    <div id="phaser-game" style="background-color: #2DC1F8;">
     </div>
   </body>
 </html>

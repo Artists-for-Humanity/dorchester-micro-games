@@ -20,12 +20,21 @@ export default class MainScene extends Phaser.Scene {
 
   preload() {
     this.load.image('grass', 'assets/img/grass.png');
-    this.load.image('road-lanes-2', 'assets/img/road-lanes-2.png');
+    this.load.image('road-lanes-2', 'assets/img/road-2.png');
     this.load.image('train-track', 'assets/img/train-track.png');
 	}
 
+  getTileScale(textureKey: string) {
+    // the diagonal should fit the width of the screen, so find the ratio between the width and height and adjust accordingly
+    // the diagonal size can be found using the pytahogrean theorem
+    const texture = this.textures.get(textureKey).getSourceImage();
+
+    return Math.hypot(texture.width, texture.height);
+  }
+
   create() {
     document.getElementById('game-overlay')!.style.display = 'flex';
+    document.getElementById('phaser-game')!.style.backgroundColor = '#B9F065'
 
     // Create the player sprite
     this.tiles = this.add.group([]);
@@ -33,23 +42,15 @@ export default class MainScene extends Phaser.Scene {
       .setDepth(2);
 
 
-    const getTileScale = (textureKey: string) => {
-      // the diagonal should fit the width of the screen, so find the ratio between the width and height and adjust accordingly
-      // the diagonal size can be found using the pytahogrean theorem
-      const texture = this.textures.get(textureKey).getSourceImage();
-
-      return Math.hypot(texture.width, texture.height);
-    }
-
     this.components.push(
       TravelComponentFactory('grass', 3),
+      TravelComponentFactory('grass', 3),
       TravelComponentFactory('road-lanes-2', 2),
       TravelComponentFactory('grass', 3),
       TravelComponentFactory('train-track', 2),
       TravelComponentFactory('train-track', 2),
       TravelComponentFactory('grass', 3),
       TravelComponentFactory('road-lanes-2', 2),
-
     )
 
     let demo = 0;
@@ -57,7 +58,7 @@ export default class MainScene extends Phaser.Scene {
       const { texture } = component;
       const img = this.add.image(0, this.game.canvas.height - (this.textures.get(texture).getSourceImage().height) - demo, texture)
         .setOrigin(0)
-        .setScale(getTileScale('grass'), 1)
+        .setScale(this.getTileScale('grass'), 1)
         .setRotation(PhaserMath.DegToRad(5));
       
       this.tiles.add(img);
@@ -107,6 +108,23 @@ export default class MainScene extends Phaser.Scene {
   isTweening = false;
 
   moveMap(direction: 'up' | 'down' | 'right' | 'left') {
+    const texture = ['grass', 'grass', 'grass', 'grass', 'road-lanes-2', 'train-track'][Math.floor(Math.random() * 6)];
+
+    const children = this.tiles.getChildren();
+
+    const img = new Phaser.GameObjects.Image(this, 0,
+      (children[children.length - 1] as Phaser.GameObjects.Image).y - (this.textures.get(texture).getSourceImage().height),// children.map(c => (c as GameObjects.Image).height).reduce((prev, curr) => prev + curr),
+    texture)
+    .setOrigin(0)
+    .setScale(this.getTileScale(texture), 1)
+    .setRotation(PhaserMath.DegToRad(5));
+
+    this.add.existing(img);
+    this.tiles.add(img);
+
+    console.log(this.tiles.getChildren().map(c => (c as GameObjects.Image).texture.key));
+
+    if (this.isTweening) return;
     switch(direction) {
       case "up": {
         this.tiles.children.iterate((tile) => {
