@@ -18,7 +18,7 @@ function update(){
   if(buttonCounter == 1){
     var body = document.getElementsByTagName('body')[0];
     body.style.backgroundImage = 'url(assets/1.1.png)';
-    tool.style.backgroundImage = 'url(assets/hammer.png)'
+    tool.style.backgroundImage = 'url(assets/tools.png)'
     text.innerHTML = "Yay! It look's better ... but what happened to the windows?"
     transition()
     rotateToolOnce()
@@ -26,7 +26,7 @@ function update(){
   if(buttonCounter == 2){
     var body = document.getElementsByTagName('body')[0];
     body.style.backgroundImage = 'url(assets/1.2.png)';
-    tool.style.backgroundImage = 'url(assets/paintbrush.png)'
+    tool.style.backgroundImage = 'url(assets/paint.png)'
     text.innerHTML = "Hmmm, it's missing some color, let's see if you have what it takes."
     transition()
     rotateToolOnce()
@@ -35,7 +35,7 @@ function update(){
     var body = document.getElementsByTagName('body')[0];
     body.style.backgroundImage = 'url(assets/1.3.png)';
     tool.style.backgroundImage = 'url(assets/paintbrush.png)'
-    text.innerHTML = "Putting those art skills to good use yet? Draw the MBTA logo!"
+    text.innerHTML = "Putting those art skills to good use yet? Paint the MBTA logo!"
     transition()
     rotateToolOnce()
   }
@@ -50,32 +50,32 @@ function update(){
   if(buttonCounter == 5){
     var body = document.getElementsByTagName('body')[0];
     body.style.backgroundImage = 'url(assets/2.0.png)';
-    tool.style.backgroundImage = 'url(assets/broom.png)'
-    text.innerHTML = "Dang it, looks like we have ALOT more work to do."
+    tool.style.backgroundImage = 'url(assets/lightbulb.png)'
+    text.innerHTML = "We have ALOT more work to do. First, repair the lights."
     transition()
     rotateToolOnce()
   }
   if(buttonCounter == 6){
     var body = document.getElementsByTagName('body')[0];
     body.style.backgroundImage = 'url(assets/2.1.png)';
-    tool.style.backgroundImage = 'url(assets/paintbrush.png)'
-    text.innerHTML = "Well don't just stand there, there's more work to be done."
+    tool.style.backgroundImage = 'url(assets/tools.png)'
+    text.innerHTML = "Well don't just stand there, the windows are still broken!"
     transition()
     rotateToolOnce()
   }
   if(buttonCounter == 7){
     var body = document.getElementsByTagName('body')[0];
     body.style.backgroundImage = 'url(assets/2.2.png)';
-    tool.style.backgroundImage = 'url(assets/hammer.png)'
-    text.innerHTML = "Just trust me. The hard work will pay off, I can feel it."
+    tool.style.backgroundImage = 'url(assets/broom.png)'
+    text.innerHTML = "The train itself is fine for now ... but it isn't clean yet."
     transition()
     rotateToolOnce()
   }
   if(buttonCounter == 8){
     var body = document.getElementsByTagName('body')[0];
     body.style.backgroundImage = 'url(assets/2.3.png)';
-    tool.style.backgroundImage = 'url(assets/scissors.png)'
-    text.innerHTML = "Good work, I like where this is going. Almost there...!"
+    tool.style.backgroundImage = 'url(assets/perfume.png)'
+    text.innerHTML = "It sure looks cleaner, but it still smells terrible..."
     transition()
     rotateToolOnce()
   }
@@ -87,23 +87,32 @@ function update(){
     transition()
     rotateToolOnce()
   }
-  if(buttonCounter >= 10){
-    if(buttonCounter%2 == 0){
-      var body = document.getElementsByTagName('body')[0];
-      body.style.backgroundImage = 'url(assets/3.0.png)';
-      tool.style.backgroundImage = 'url(assets/view.png)'
-      text.innerHTML = ""
-      transition()
-      rotateToolOnce()
-    } else {
-      var body = document.getElementsByTagName('body')[0];
-      body.style.backgroundImage = 'url(assets/3.1.png)';
-      tool.style.backgroundImage = 'url(assets/view.png)'
-      text.innerHTML = ""
-      transition()
-      rotateToolOnce()
-    }
+  //test for Handy
+  if(buttonCounter == 10){
+    var body = document.getElementsByTagName('body')[0];
+    body.style.backgroundImage = 'url(assets/3.0.png)';
+    tool.style.backgroundImage = 'url(assets/view.png)'
+    text.innerHTML = ""
+    transition()
+    rotateToolOnce()
   }
+  // if(buttonCounter >= 10){
+  //   if(buttonCounter%2 == 0){
+  //     var body = document.getElementsByTagName('body')[0];
+  //     body.style.backgroundImage = 'url(assets/3.0.png)';
+  //     tool.style.backgroundImage = 'url(assets/view.png)'
+  //     text.innerHTML = ""
+  //     transition()
+  //     rotateToolOnce()
+  //   } else {
+  //     var body = document.getElementsByTagName('body')[0];
+  //     body.style.backgroundImage = 'url(assets/3.1.png)';
+  //     tool.style.backgroundImage = 'url(assets/view.png)'
+  //     text.innerHTML = ""
+  //     transition()
+  //     rotateToolOnce()
+  //   }
+  // }
 }
 
 function transition(){
