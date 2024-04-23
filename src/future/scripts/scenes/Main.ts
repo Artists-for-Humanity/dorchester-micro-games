@@ -1,18 +1,19 @@
 import { Game, GameObjects, Math as PhaserMath, Physics } from "phaser";
+import Train from "../objects/Train";
+import Grass from "../objects/Grass";
 
-interface BaseTravelComponent {
-  texture: string,
-  spaces: number
-}
+type RoadComponent = Train | Grass;
 
 export default class MainScene extends Phaser.Scene {
   player: GameObjects.Sprite
   lastMoveTime = 500;
   game: Game;
   lastTextureTotal = 0;
-  components: { texture: string; spaces: number }[] = [];
+  components: ('road' | 'grass' | 'train')[] = [];
   tiles: GameObjects.Group;
   xOffset: number
+  lastObject: GameObjects.Container | GameObjects.Image
+  layerPriority = 0;
 
   constructor() {
     super({ key: 'Main' })
@@ -20,8 +21,9 @@ export default class MainScene extends Phaser.Scene {
 
   preload() {
     this.load.image('grass', 'assets/img/grass.png');
-    this.load.image('road-lanes-2', 'assets/img/road-2.png');
+    this.load.image('road', 'assets/img/road-2.png');
     this.load.image('train-track', 'assets/img/train-track.png');
+    this.load.image('train', 'assets/img/train.png');
 	}
 
   getTileScale(textureKey: string) {
@@ -35,35 +37,50 @@ export default class MainScene extends Phaser.Scene {
   create() {
     document.getElementById('game-overlay')!.style.display = 'flex';
     document.getElementById('phaser-game')!.style.backgroundColor = '#B9F065'
-
     // Create the player sprite
-    this.tiles = this.add.group([]);
-    this.player = this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height - 300, 'player')
-      .setDepth(2);
+    this.tiles = this.add.group([]).setDepth(0);
+
+    this.player = this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height - (75 * 3.5), 'player')
+      .setDepth(100);
 
 
     this.components.push(
-      TravelComponentFactory('grass', 3),
-      TravelComponentFactory('grass', 3),
-      TravelComponentFactory('road-lanes-2', 2),
-      TravelComponentFactory('grass', 3),
-      TravelComponentFactory('train-track', 2),
-      TravelComponentFactory('train-track', 2),
-      TravelComponentFactory('grass', 3),
-      TravelComponentFactory('road-lanes-2', 2),
+      'grass', 'grass', 'train', 'grass', 'train'
     )
 
-    let demo = 0;
-    this.components.forEach((component: BaseTravelComponent ) => {
-      const { texture } = component;
-      const img = this.add.image(0, this.game.canvas.height - (this.textures.get(texture).getSourceImage().height) - demo, texture)
-        .setOrigin(0)
-        .setScale(this.getTileScale('grass'), 1)
-        .setRotation(PhaserMath.DegToRad(5));
+    this.components.forEach((component) => {
+      const children = this.tiles.getChildren() as (typeof this.lastObject)[];
       
-      this.tiles.add(img);
-      demo += this.textures.get(texture).getSourceImage().height;
+      this.generateMap(component);
+
+      // if (component.type === 'RoadImage') {
+      //   const uninteractiveComponent = component as {texture: string, spaces: number, type: 'RoadImage'};
+      //   const { texture } = uninteractiveComponent;
+      //   const img = this.add.image(0, this.game.canvas.height - (this.textures.get(texture).getSourceImage().height) - this.demo, texture)
+      //     .setOrigin(0)
+      //     .setScale(this.getTileScale('grass'), 1)
+      //     .setDepth(this.layerPriority + 1);
+      //   this.tiles.add(img);
+      //   console.log(`grass: ${this.textures.get(texture).getSourceImage().height}`)
+      //   this.demo += this.textures.get(texture).getSourceImage().height;
+      //   this.layerPriority++;
+      // } else {
+      //   const roadComponent: RoadComponent = component as RoadComponent;
+      //   roadComponent
+      //     .setPosition(this.game.canvas.width / 2, this.game.canvas.height - (roadComponent.displayHeight) - this.demo)
+      //     .setDepth(this.layerPriority + 1);
+        
+      //   this.layerPriority++;
+      //   this.add.existing(roadComponent);
+      //   this.tiles.add(roadComponent);
+      //   console.log(this.textures.get('train-track').getSourceImage().height);
+      //   this.demo += this.textures.get('train-track').getSourceImage().height;
+      // }
+      // console.log(component.type, this.demo);
     })
+
+    // const train = new Train(this, this.game.canvas.width / 2, this.game.canvas.height / 2).setDepth(5);
+    // 
   
     // Capture keyboard input
     this.input.keyboard.on('keydown-SPACE', () => {
@@ -77,18 +94,37 @@ export default class MainScene extends Phaser.Scene {
     })
   }
 
-  generateMap() {
-    // some sort of algorithm to generate the components on update
+  generateMap(component: typeof this.components[number]) {
+    console.log(`last object has a y of ${this.lastObject?.y}`)
+    switch (component) {
+      case "road":
+        const img = this.add.image(0, (this.lastObject?.y || this.game.canvas.height) - (75 * 3), 'road')
+          .setOrigin(0)
+          .setScale(this.getTileScale('road'), 1);
+
+        this.tiles.add(img);
+        this.lastObject = img;
+        break
+      case "grass": {
+        const img = this.add.image(0, (this.lastObject?.y || this.game.canvas.height) - (75 * 3), 'grass')
+          .setOrigin(0)
+          .setScale(this.getTileScale('grass'), 1);
+
+          this.tiles.add(img);
+          this.lastObject = img;
+        break;
+      }
+      case "train": {
+        const train = new Train(this, this.game.canvas.width / 2, (this.lastObject?.y || this.game.canvas.height) - 75);
+        this.add.existing(train);
+
+        this.tiles.add(train);
+        this.lastObject = train;
+      }
+    }
   }
     
   update() {
-    // this.movePlayer();
-    // Reset player velocity
-    // this.player.setVelocity(0);
-  
-    // Allow only left movement
-    // this.player.setVelocityX(-100);
-    // this.tiles.incY(2)
     if ((this.tiles.getChildren()[0] as GameObjects.Image).y > this.game.canvas.height) {
       this.tiles.remove(this.tiles.getChildren()[0] as GameObjects.Image, true, true);
     }
@@ -98,7 +134,7 @@ export default class MainScene extends Phaser.Scene {
     this.tiles.children.iterate((tile) => {
       this.tweens.add({
           targets: tile,
-          y: (tile as GameObjects.Image).y + 70,
+          y: (tile as GameObjects.Image).y + 75,
           duration: 500,
           ease: 'Sine.easeInOut'
       });
@@ -108,29 +144,19 @@ export default class MainScene extends Phaser.Scene {
   isTweening = false;
 
   moveMap(direction: 'up' | 'down' | 'right' | 'left') {
-    const texture = ['grass', 'grass', 'grass', 'grass', 'road-lanes-2', 'train-track'][Math.floor(Math.random() * 6)];
-
-    const children = this.tiles.getChildren();
-
-    const img = new Phaser.GameObjects.Image(this, 0,
-      (children[children.length - 1] as Phaser.GameObjects.Image).y - (this.textures.get(texture).getSourceImage().height),// children.map(c => (c as GameObjects.Image).height).reduce((prev, curr) => prev + curr),
-    texture)
-    .setOrigin(0)
-    .setScale(this.getTileScale(texture), 1)
-    .setRotation(PhaserMath.DegToRad(5));
-
-    this.add.existing(img);
-    this.tiles.add(img);
-
-    console.log(this.tiles.getChildren().map(c => (c as GameObjects.Image).texture.key));
-
     if (this.isTweening) return;
+    const componentType = ['grass', 'train'][Math.floor(Math.random() * 2)] as typeof this.components[number];
+    
+    this.generateMap(componentType);
+
+
+    // console.log(this.tiles.getChildren().map(c => (c as GameObjects.Image).texture.key));
     switch(direction) {
       case "up": {
         this.tiles.children.iterate((tile) => {
           this.tweens.add({
               targets: tile,
-              y: (tile as GameObjects.Image).y + 70,
+              y: (tile as GameObjects.Image).y + 75,
               duration: 500,
               ease: 'Sine.easeInOut',
               onStart: () => { this.isTweening = true; },
@@ -143,7 +169,7 @@ export default class MainScene extends Phaser.Scene {
         this.tiles.children.iterate((tile) => {
           this.tweens.add({
               targets: tile,
-              y: (tile as GameObjects.Image).y - 70,
+              y: (tile as GameObjects.Image).y - 75,
               duration: 500,
               ease: 'Sine.easeInOut',
               onStart: () => { this.isTweening = true; },
@@ -155,8 +181,8 @@ export default class MainScene extends Phaser.Scene {
       case "right": {
         this.tweens.add({
           targets: this.player,
-          x: (this.player as GameObjects.Sprite).x + 70,
-          y: (this.player as GameObjects.Sprite).y + (70 * Math.tan(PhaserMath.DegToRad(5))),
+          x: (this.player as GameObjects.Sprite).x + 75,
+          y: (this.player as GameObjects.Sprite).y,
           duration: 500,
           ease: 'Sine.easeInOut',
           onStart: () => { this.isTweening = true; },
@@ -167,8 +193,8 @@ export default class MainScene extends Phaser.Scene {
       case "left": {
         this.tweens.add({
           targets: this.player,
-          x: (this.player as GameObjects.Sprite).x - 70,
-          y: (this.player as GameObjects.Sprite).y - (70 * Math.tan(PhaserMath.DegToRad(5))),
+          x: (this.player as GameObjects.Sprite).x - 75,
+          y: (this.player as GameObjects.Sprite).y,
           duration: 500,
           ease: 'Sine.easeInOut',
           onStart: () => { this.isTweening = true; },
@@ -176,9 +202,16 @@ export default class MainScene extends Phaser.Scene {
         });
       }
     }
+
+    console.log(this.tiles.getChildren().map(g => ({
+      x: (g as Phaser.GameObjects.Image | Phaser.GameObjects.Container).x,
+      y: (g as Phaser.GameObjects.Image | Phaser.GameObjects.Container).y,
+      type: g.type,
+      z: (g as Phaser.GameObjects.Image | Phaser.GameObjects.Container).depth
+    })))
   }
 }
 
-function TravelComponentFactory(texture: string, spaces: number, action?: () => void): BaseTravelComponent {
-  return { texture, spaces };
+function TravelComponentFactory(texture: string, spaces: number) : {texture: string, spaces: number, type: 'RoadImage'} {
+  return { texture, spaces, type: 'RoadImage' };
 }
