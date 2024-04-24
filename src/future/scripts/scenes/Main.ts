@@ -17,9 +17,9 @@ export default class MainScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('grass', 'assets/img/grass.png');
-    this.load.image('road-lanes-2', 'assets/img/road-lanes-2.png');
-    this.load.image('train-track', 'assets/img/train-track.png');
+    this.load.image('grass', '/future/assets/img/grass.png');
+    this.load.image('road-lanes-2', '/future/assets/img/road-lanes-2.png');
+    this.load.image('train-track', '/future/assets/img/train-track.png');
 	}
 
   create() {
