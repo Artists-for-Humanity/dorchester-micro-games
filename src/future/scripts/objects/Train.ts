@@ -17,6 +17,9 @@ export default class Train extends Phaser.GameObjects.Container {
     scene.events.on('create', this.create, this);
     scene.events.on('update', this.update, this);
 
+    this.width = this.scene.game.canvas.width;
+    this.height = 75;
+
     this.cooldown = 500; // milliseconds;
     this.backgroundX = x;
     this.backgroundY = y;
@@ -35,7 +38,7 @@ export default class Train extends Phaser.GameObjects.Container {
 
     this.scene.add.existing(this.track);
     this.scene.add.existing(this.train);
-    this.add([ this.track, this.train ]).setDepth(10);
+    this.add([ this.track, this.train ]).setDepth(999);
 
     // image(0, this.game.canvas.height - (this.textures.get(texture).getSourceImage().height) - demo, texture);
   }

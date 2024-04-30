@@ -31,14 +31,59 @@ export default class MainScene extends Phaser.Scene {
     // the diagonal size can be found using the pytahogrean theorem
     const texture = this.textures.get(textureKey).getSourceImage();
 
-    return Math.hypot(texture.width, texture.height);
+    const getTileScale = (textureKey: string) => {
+      // the diagonal should fit the width of the screen, so find the ratio between the width and height and adjust accordingly
+      // the diagonal size can be found using the pytahogrean theorem
+      const texture = this.textures.get(textureKey).getSourceImage();
+
+    const level = ['grass', 'grass', 'road', 'grass', 'train', 'train', 'grass'];
+
+    this.components.push(
+      ...(level as typeof this.components),
+    )
+
+    this.components.forEach((component) => {
+      this.generateMap(component);
+    })
+
+  
+    // Set collision bounds
+    // this.player.setCollideWorldBounds(true);
+  
+    // Capture keyboard input
+    this.input.keyboard.on('keydown-SPACE', this.movePlayer);
   }
 
-  create() {
-    document.getElementById('game-overlay')!.style.display = 'flex';
-    document.getElementById('phaser-game')!.style.backgroundColor = '#B9F065'
-    // Create the player sprite
-    this.tiles = this.add.group([]).setDepth(0);
+  generateMap(component: typeof this.components[number]) {
+    console.log(`now rendering a ${component} where the last object has a y of ${this.lastObject?.displayOriginY}`)
+    switch (component) {
+      case "road":
+        const img = this.add.image(0, (this.lastObject?.y || this.game.canvas.height) - (75 * 2), 'road')
+          .setOrigin(0);
+
+        this.tiles.add(img);
+        this.lastObject = img;
+        break
+      case "grass": {
+        const img = this.add.image(0, (this.lastObject?.y || this.game.canvas.height) - (75 * 3), 'grass')
+          .setOrigin(0)
+          .setScale(this.getTileScale('grass'), 1);
+
+          this.tiles.add(img);
+          this.lastObject = img;
+        break;
+      }
+      case "train": {
+        const train = new Train(this, this.game.canvas.width / 2, (this.lastObject?.y || this.game.canvas.height) - (75 * 0.75));
+        this.add.existing(train);
+
+        this.tiles.add(train);
+        this.lastObject = train;
+        console.log(`lastobj y: ${this.lastObject.displayOriginY} ${this.lastObject.y}`)
+      }
+    }
+
+    console.log(`the rendered lastobj now has a y of ${this.lastObject.y}`)
 
     this.player = this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height - (75 * 3.5), 'player')
       .setDepth(100);
@@ -92,36 +137,6 @@ export default class MainScene extends Phaser.Scene {
         this.moveMap(control.split('-')[1] as 'up' | 'down' | 'right' | 'left');
       })
     })
-  }
-
-  generateMap(component: typeof this.components[number]) {
-    console.log(`last object has a y of ${this.lastObject?.y}`)
-    switch (component) {
-      case "road":
-        const img = this.add.image(0, (this.lastObject?.y || this.game.canvas.height) - (75 * 3), 'road')
-          .setOrigin(0)
-          .setScale(this.getTileScale('road'), 1);
-
-        this.tiles.add(img);
-        this.lastObject = img;
-        break
-      case "grass": {
-        const img = this.add.image(0, (this.lastObject?.y || this.game.canvas.height) - (75 * 3), 'grass')
-          .setOrigin(0)
-          .setScale(this.getTileScale('grass'), 1);
-
-          this.tiles.add(img);
-          this.lastObject = img;
-        break;
-      }
-      case "train": {
-        const train = new Train(this, this.game.canvas.width / 2, (this.lastObject?.y || this.game.canvas.height) - 75);
-        this.add.existing(train);
-
-        this.tiles.add(train);
-        this.lastObject = train;
-      }
-    }
   }
     
   update() {
