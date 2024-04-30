@@ -3,7 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: ['./src/future/scripts/game.ts'],
+  entry: ['/src/future/scripts/game.ts', '/src/present/script.js'],
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].bundle.js',
@@ -13,7 +13,9 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js']
   },
   module: {
-    rules: [{ test: /\.tsx?$|\.jsx?$/, include: path.join(__dirname, '../src'), loader: 'ts-loader' }]
+    rules: [
+      { test: /\.tsx?$|\.jsx?$/, include: path.join(__dirname, '../src/future'), loader: 'ts-loader' },
+    ]
   },
   optimization: {
     splitChunks: {
@@ -44,15 +46,19 @@ module.exports = {
       gameName: 'Present Games',
     }),
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
+      template: 'src/past/index.html',
       gameName: 'Portal',
     }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: 'src/future/assets', to: 'assets' },
+        { from: 'src/future/assets', to: 'future/assets' },
+        { from: 'src/present/assets', to: 'present/assets' },
+        { from: 'src/present/styles.css', to: 'present/styles.css' },
+        { from: 'src/present/script.js', to: 'present/script.js' },
+        // { from: 'src/past/assets', to: 'past/assets' },
         { from: 'pwa', to: '' },
         { from: 'src/favicon.ico', to: '' }
       ]
-    })
+    }),
   ]
 };

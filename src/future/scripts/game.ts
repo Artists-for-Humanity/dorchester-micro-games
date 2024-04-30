@@ -28,5 +28,7 @@ const config = {
 }
 
 window.addEventListener('load', () => {
-  const game = new Phaser.Game(config)
+  if (window.location.pathname.includes('future')) {
+    const game = new Phaser.Game(config);
+  }
 })
