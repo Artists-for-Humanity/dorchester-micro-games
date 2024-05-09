@@ -46,7 +46,7 @@ module.exports = {
       gameName: 'Present Games',
     }),
     new HtmlWebpackPlugin({
-      template: 'src/past/index.html',
+      template: 'src/index.html',
       gameName: 'Portal',
     }),
     new CopyWebpackPlugin({
