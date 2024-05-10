@@ -51,10 +51,11 @@ module.exports = {
     }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: 'src/future/assets', to: 'future/assets' },
-        { from: 'src/present/assets', to: 'present/assets' },
-        { from: 'src/present/styles.css', to: 'present/styles.css' },
-        { from: 'src/present/script.js', to: 'present/script.js' },
+        // { from: 'src/future/assets', to: 'future/assets' },
+        // { from: 'src/past/assets', to: 'past/assets' },
+        // { from: 'src/present/assets', to: 'present/assets' },
+        // { from: 'src/present/styles.css', to: 'present/styles.css' },
+        // { from: 'src/present/script.js', to: 'present/script.js' },
         // { from: 'src/past/assets', to: 'past/assets' },
         { from: 'pwa', to: '' },
         { from: 'src/favicon.ico', to: '' }
