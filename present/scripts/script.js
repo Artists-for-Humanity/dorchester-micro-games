@@ -1,3 +1,4 @@
+
 let buttonCounter = 0; 
 const tool = document.getElementById('tool');
 const text = document.getElementById('text');
