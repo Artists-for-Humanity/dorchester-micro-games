@@ -1,0 +1,125 @@
+@font-face {
+  font-family: Quicksand;
+  src: url(./Quicksand-VariableFont_wght.ttf);
+}
+
+
+body{
+  height:100vh;
+  background-color: rgb(0, 0, 0) ;
+  overflow: hidden;
+  position: absolute;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.location{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-board {
+  display: grid;
+  height: 90vh;
+  width: 80vw;
+  /* border: 10px solid black; */
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  /* background-color: aliceblue; */
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  
+  }
+
+  /* CSS for flip animation */
+.colorCard {
+  /* Other styles */
+  transition: transform 0.5s ease; /* Add transition for smooth animation */
+  border-radius: 5px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.flip {
+  transform: rotateY(180deg); /* Rotate the card to simulate a flip */
+}
+
+
+
+
+.winLocation {
+  position: absolute;
+  z-index: 3;
+  display: none;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Make the winLocation div take up the full width */
+  height: 100%; /* Make the winLocation div take up the full height */
+}
+
+
+
+.winText{
+  font-family: Quicksand;
+  font-weight: 600;
+  text-align: center;
+  font-size: 50px;
+}
+
+/* Animation for winScreen border */
+/* Animation for winScreen border */
+@keyframes winScreenBorderAnimation {
+  0% { border-color: rgb(255, 0, 0); }
+  10% { border-color: rgb(255, 128, 0); }
+  20% { border-color: rgb(255, 255, 0); }
+  30% { border-color: rgb(119, 255, 0); }
+  40% { border-color: rgb(0, 255, 72); }
+  50% { border-color: rgb(0, 255, 208); }
+  60% { border-color: rgb(0, 119, 255); }
+  70% { border-color: rgb(119, 0, 255); }
+  80% { border-color: rgb(212, 0, 255); }
+  100% { border-color: rgb(255, 0, 0); }
+}
+
+/* Animation for restartIcon border */
+@keyframes restartIconBorderAnimation {
+  0% { border-color: rgb(255, 0, 0); }
+  10% { border-color: rgb(255, 128, 0); }
+  20% { border-color: rgb(255, 255, 0); }
+  30% { border-color: rgb(119, 255, 0); }
+  40% { border-color: rgb(0, 255, 72); }
+  50% { border-color: rgb(0, 255, 208); }
+  60% { border-color: rgb(0, 119, 255); }
+  70% { border-color: rgb(119, 0, 255); }
+  80% { border-color: rgb(212, 0, 255); }
+  100% { border-color: rgb(255, 0, 0); }
+}
+
+.winScreen {
+  background-color: rgb(255, 255, 255);
+  width: 40vw;
+  height: 15vh;
+  border: solid 12px rgb(255, 255, 255);
+  border-radius: 50px;
+  margin-bottom: 5vh;
+  animation: winScreenBorderAnimation 10s infinite alternate; /* Apply animation */
+}
+
+.restartIcon {
+  background-color: rgb(255, 255, 255);
+  border: solid 20px rgb(255, 255, 255);
+  border-radius: 80px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+  width: 30vw;
+  animation: restartIconBorderAnimation 10s infinite alternate; /* Apply animation */
+}
