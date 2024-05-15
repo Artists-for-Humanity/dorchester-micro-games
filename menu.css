@@ -69,7 +69,7 @@ body {
   font-weight: 700;
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   height: 100vh;
   background-color: #000;
   color: #a8fffb;
@@ -88,6 +88,7 @@ body {
 .mini-games-header {
   font-size: 24px;
   margin-bottom: 50px;
+  margin-top: 20px;
   /* animation: scaleAnimation 2s infinite; */
 }
 
