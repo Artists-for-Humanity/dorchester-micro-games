@@ -24,7 +24,7 @@ body{
 
 .game-board {
   display: grid;
-  height: 90vh;
+  height: 85vh;
   width: 80vw;
   /* border: 10px solid black; */
   grid-template-columns: repeat(4, 1fr);
