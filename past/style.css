@@ -28,7 +28,7 @@ body{
   width: 80vw;
   /* border: 10px solid black; */
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   /* background-color: aliceblue; */
   grid-column-gap: 10px;
   grid-row-gap: 10px;
