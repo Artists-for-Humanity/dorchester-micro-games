@@ -75,8 +75,8 @@ function update(){
   if(buttonCounter == 8){
     var body = document.getElementsByTagName('body')[0];
     body.style.backgroundImage = 'url(assets/2.3.png)';
-    tool.style.backgroundImage = 'url(assets/perfume.png)'
-    text.innerHTML = "It sure looks cleaner, but it still smells terrible..."
+    tool.style.backgroundImage = 'url(assets/scissors.png)'
+    text.innerHTML = "It sure looks cleaner, but who's gonna cut the vines?"
     transition()
     rotateToolOnce()
   }
@@ -88,32 +88,14 @@ function update(){
     transition()
     rotateToolOnce()
   }
-  //test for Handy
   if(buttonCounter == 10){
     var body = document.getElementsByTagName('body')[0];
     body.style.backgroundImage = 'url(assets/3.0.png)';
-    tool.style.backgroundImage = 'url(assets/view.png)'
+    tool.style.display = "none"
     text.innerHTML = ""
     transition()
     rotateToolOnce()
   }
-  // if(buttonCounter >= 10){
-  //   if(buttonCounter%2 == 0){
-  //     var body = document.getElementsByTagName('body')[0];
-  //     body.style.backgroundImage = 'url(assets/3.0.png)';
-  //     tool.style.backgroundImage = 'url(assets/view.png)'
-  //     text.innerHTML = ""
-  //     transition()
-  //     rotateToolOnce()
-  //   } else {
-  //     var body = document.getElementsByTagName('body')[0];
-  //     body.style.backgroundImage = 'url(assets/3.1.png)';
-  //     tool.style.backgroundImage = 'url(assets/view.png)'
-  //     text.innerHTML = ""
-  //     transition()
-  //     rotateToolOnce()
-  //   }
-  // }
 }
 
 function transition(){
