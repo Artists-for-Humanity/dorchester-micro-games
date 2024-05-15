@@ -103,7 +103,7 @@ body {
 }
 
 .game-option:hover {
-  background-color: #a8fffb;
+  background-color: #a8fffb60;
   transition: 0.3s;
 }
 
