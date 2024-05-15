@@ -38,7 +38,7 @@ body {
 .loading-text,
 .mini-games-header {
   font-size: 24px;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
   margin-top: 20px;
   /* animation: scaleAnimation 2s infinite; */
 }
@@ -88,7 +88,7 @@ body {
 .game-option {
   border: 0.5px solid #a8fffb;
   margin: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   padding-top: 20px;
   padding-bottom: 10px;
   text-align: left;
