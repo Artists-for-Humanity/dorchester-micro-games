@@ -27,8 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
     "url(pastAssets/eight.jpeg)",
     "url(pastAssets/nine.jpeg)",
     "url(pastAssets/ten.jpeg)",
-    "url(pastAssets/eleven.jpeg)",
-    "url(pastAssets/twelve.jpeg)",
+    // "url(pastAssets/eleven.jpeg)",
+    // "url(pastAssets/twelve.jpeg)",
   ];
   let colorPresent = [...colorExist, ...colorExist];
 
