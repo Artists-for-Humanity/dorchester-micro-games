@@ -1,0 +1,12 @@
+{
+  "name": "my-games-project",
+  "version": "1.0.0",
+  "description": "A web project hosting multiple games.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

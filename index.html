@@ -4,10 +4,69 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dorchester Micro Games</title>
+    <link rel="stylesheet" href="menu.css" />
   </head>
   <body>
-    <a href="./future/future.html">Future</a>
+    <!-- <div id="loading-screen">
+      <div class="loading-text">[MINI GAMES]</div>
+      <div class="loading-subtext">LOADING ...</div>
+    </div> -->
+
+    <div id="loading-screen">
+      <div class="loading-text">[MINI GAMES]</div>
+      <div class="loading-subtext">
+        LOADING<span class="dot">.</span><span class="dot">.</span
+        ><span class="dot">.</span>
+      </div>
+    </div>
+    <div id="main-screen" class="hidden">
+      <div class="mini-games-header">[MINI GAMES]</div>
+      <a class="game-option" href="./past/past.html">
+        <div>
+          <div class="game-title">PAST</div>
+          <div class="game-description">
+            Take a peek the Past of Dorchester through landmarks ......
+          </div>
+        </div>
+      </a>
+
+      <a class="game-option" href="./present/present.html">
+        <div>
+          <div class="game-title">PRESENT</div>
+          <div class="game-description">
+            Make the Present of Dorchester a better place for everyone ......
+          </div>
+        </div>
+        <div class="game-icons">
+          <span class="icon">
+            <img src="/assets/paint.svg" class="paint-icon" alt="" />
+          </span>
+          <span class="icon">
+            <img src="/assets/tools.svg" alt="" />
+          </span>
+          <span class="icon">
+            <img src="/assets/scissor.svg" alt="" />
+          </span>
+        </div>
+      </a>
+      <a class="game-option" href="./future/future.html">
+        <div>
+          <div class="game-title">FUTURE</div>
+          <div class="game-description">
+            Travel to the Future of Dorchester through the landscapes ......
+          </div>
+        </div>
+        <div class="game-icons">
+          <span class="icon">
+            <img src="/assets/train.svg" alt="" />
+          </span>
+        </div>
+      </a>
+    </div>
+    <script src="menu.js"></script>
+
+    <!-- <a href="./future/future.html">Future</a>
     <a href="./past/past.html">Past</a>
-    <a href="./present/present.html">Present</a>
+    <a href="./present/present.html">Present</a> -->
   </body>
 </html>

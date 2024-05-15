@@ -1,0 +1,192 @@
+/* body {
+  background-color: #08141e;
+  font-family: Helvetica Neue, sans-serif;
+} */
+
+/* body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #000;
+  color: #a8fffb;
+}
+
+.hidden {
+  display: none;
+}
+
+#loading-screen,
+#main-screen {
+  text-align: center;
+}
+
+.loading-text,
+.mini-games-header {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.loading-subtext {
+  font-size: 18px;
+}
+
+.game-option {
+  border: 1px solid #a8fffb;
+  margin: 20px;
+  padding: 20px;
+  text-align: left;
+}
+
+.game-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.game-description {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.game-icons {
+  font-size: 24px;
+} */
+
+@import url("https://fonts.googleapis.com/css2?family=Krona+One&display=swap");
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./helvetica-neue-5/HelveticaNeueBold.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  font-family: Helvetica Neue;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #000;
+  color: #a8fffb;
+}
+
+.hidden {
+  display: none;
+}
+
+#loading-screen,
+#main-screen {
+  text-align: center;
+}
+
+.loading-text,
+.mini-games-header {
+  font-size: 24px;
+  margin-bottom: 50px;
+  /* animation: scaleAnimation 2s infinite; */
+}
+
+/* @keyframes scaleAnimation {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+} */
+
+.loading-subtext {
+  font-size: 18px;
+}
+
+.dot {
+  animation: dotAnimation 1.5s infinite;
+}
+
+.dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes dotAnimation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.game-option {
+  border: 0.5px solid #a8fffb;
+  margin: 20px;
+  margin-bottom: 30px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  text-align: left;
+  width: 90vw;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-decoration: none;
+  color: white;
+  transition: 0.3;
+}
+
+.game-option:hover {
+  background-color: #a8fffb;
+  transition: 0.3s;
+}
+
+.game-option:active {
+  background-color: #a8fffb;
+  transition: 0.3s;
+}
+.game-title {
+  font-family: "Krona One", sans-serif;
+  padding-left: 20px;
+  padding-right: 20px;
+  /* padding-right */
+  font-size: 50px;
+  font-weight: 400;
+  /* transform: translateY(30px); */
+  /* margin-bottom: 30px; */
+}
+
+.game-description {
+  font-family: "Krona One;", sans-serif;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 12px;
+  font-weight: 400px;
+  margin-bottom: 10px;
+}
+
+.game-icons {
+  display: flex;
+  font-size: 24px;
+  width: 41px;
+  height: auto;
+  /* padding-bottom: 10px; */
+}
+
+.paint-icon {
+  padding-left: 20px;
+}
