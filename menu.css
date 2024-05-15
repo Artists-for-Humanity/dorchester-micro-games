@@ -1,59 +1,3 @@
-/* body {
-  background-color: #08141e;
-  font-family: Helvetica Neue, sans-serif;
-} */
-
-/* body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #000;
-  color: #a8fffb;
-}
-
-.hidden {
-  display: none;
-}
-
-#loading-screen,
-#main-screen {
-  text-align: center;
-}
-
-.loading-text,
-.mini-games-header {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.loading-subtext {
-  font-size: 18px;
-}
-
-.game-option {
-  border: 1px solid #a8fffb;
-  margin: 20px;
-  padding: 20px;
-  text-align: left;
-}
-
-.game-title {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.game-description {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.game-icons {
-  font-size: 24px;
-} */
-
 @import url("https://fonts.googleapis.com/css2?family=Krona+One&display=swap");
 
 @font-face {
@@ -82,6 +26,13 @@ body {
 #loading-screen,
 #main-screen {
   text-align: center;
+}
+.loading {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .loading-text,
