@@ -91,10 +91,13 @@ function update(){
   if(buttonCounter == 10){
     var body = document.getElementsByTagName('body')[0];
     body.style.backgroundImage = 'url(assets/3.0.png)';
-    tool.style.display = "none"
+    tool.style.backgroundImage = 'url(assets/reload.png)'
     text.innerHTML = ""
     transition()
     rotateToolOnce()
+  }
+  if(buttonCounter == 11){
+    window.location.reload()
   }
 }
 
