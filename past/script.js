@@ -17,8 +17,8 @@ const restartIcon = document.getElementById("restartIcon");
 document.addEventListener("DOMContentLoaded", () => {
   const gameBoard = document.getElementById("game-board");
   const colorExist = [
-    "url(pastAssets/one.jpeg)",
-    "url(pastAssets/two.jpeg)",
+    "url(pastAssets/one.png)",
+    "url(pastAssets/two.png)",
     "url(pastAssets/three.jpeg)",
     "url(pastAssets/four.png)",
     "url(pastAssets/five.png)",
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "url(pastAssets/seven.png)",
     "url(pastAssets/eight.png)",
     "url(pastAssets/nine.jpeg)",
-    "url(pastAssets/ten.jpeg)",
+    "url(pastAssets/ten.png)",
     // "url(pastAssets/eleven.jpeg)",
     // "url(pastAssets/twelve.jpeg)",
   ];
