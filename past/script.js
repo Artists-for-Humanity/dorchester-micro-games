@@ -26,7 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
     "url(pastAssets/seven.png)",
     "url(pastAssets/eight.png)",
     "url(pastAssets/nine.jpeg)",
-    "url(pastAssets/ten.png)",
+    // "url(pastAssets/tenA.png)",
+    "url(pastAssets/tenB.jpeg)",
     // "url(pastAssets/eleven.jpeg)",
     // "url(pastAssets/twelve.jpeg)",
   ];
