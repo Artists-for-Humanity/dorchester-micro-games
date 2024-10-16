@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function winCondition(index) {
-      if (finishCards.length == 12) {
+      if (finishCards.length == 10) {
         colorCardStack[index].style.backgroundImage = chosenCards[index];
         winScreen.style.display = "flex";
         restartIcon.addEventListener("click", function () {
